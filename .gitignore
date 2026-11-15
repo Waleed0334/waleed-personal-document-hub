@@ -1,0 +1,52 @@
+# Node dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Testing and coverage
+coverage/
+
+# Production build output
+dist/
+dist-ssr/
+build/
+*.local
+
+# Environment files & Secrets (CRITICAL FOR GITHUB SECURITY)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+credentials.json
+service-account*.json
+
+# Personal / Sensitive Documents Vault Files (CRITICAL)
+# Real documents should NEVER be committed to Git!
+# Only public portfolio showcase assets in public/assets/portfolio are tracked.
+uploads/
+private_documents/
+vault_storage/
+*.bak
+*.dump
+*.sql.gz
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Editor & OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Superpowers temporary workspace
+.superpowers/
