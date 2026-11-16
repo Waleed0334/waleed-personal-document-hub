@@ -21,30 +21,31 @@ export function DeleteConfirmModal({ document, isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-      <div className="w-full max-w-md bg-navy-900 border border-rose-500/30 rounded-2xl shadow-2xl p-6 relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 dark:bg-black/80 backdrop-blur-md overflow-y-auto">
+      <div className="w-full max-w-md bg-white dark:bg-navy-900 border border-rose-500/30 rounded-2xl shadow-2xl p-5 sm:p-6 relative my-auto transition-colors duration-200">
         <button
           type="button"
           onClick={onClose}
           disabled={deleting}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+          aria-label="Close delete modal"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center border border-rose-500/30 mb-4">
+        <div className="w-12 h-12 rounded-2xl bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center border border-rose-500/25 dark:border-rose-500/30 mb-4">
           <AlertTriangle className="w-6 h-6" />
         </div>
 
-        <h3 className="text-lg font-bold text-white mb-1">Delete Document Permanently?</h3>
-        <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-          You are about to permanently remove <strong className="text-white">"{document.title}"</strong> ({document.original_filename}) from your private vault.
+        <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1">Delete Document Permanently?</h3>
+        <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
+          You are about to permanently remove <strong className="text-slate-900 dark:text-white">"{document.title}"</strong> ({document.original_filename}) from your private vault.
         </p>
 
-        <div className="p-3 rounded-xl bg-navy-950/80 border border-slate-800 text-[11px] text-slate-400 space-y-1 mb-6">
+        <div className="p-3 rounded-xl bg-slate-50 dark:bg-navy-950/80 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 space-y-1 mb-6">
           <p>• The object will be purged from private Supabase Storage.</p>
           <p>• All metadata, tags, and category mappings will be deleted.</p>
-          <p className="text-rose-400 font-semibold">• This operation cannot be undone.</p>
+          <p className="text-rose-600 dark:text-rose-400 font-semibold">• This operation cannot be undone.</p>
         </div>
 
         <div className="flex items-center justify-end gap-3">
@@ -52,7 +53,7 @@ export function DeleteConfirmModal({ document, isOpen, onClose }) {
             type="button"
             onClick={onClose}
             disabled={deleting}
-            className="px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition"
+            className="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition"
           >
             Cancel
           </button>

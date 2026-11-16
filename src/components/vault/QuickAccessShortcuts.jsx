@@ -59,13 +59,13 @@ export function QuickAccessShortcuts({ onOpenCategory, onSearchKey }) {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+        <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
           Quick Access Documents
         </h3>
         <span className="text-[11px] text-slate-500">1-click direct retrieval</span>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">
         {shortcuts.map((item, idx) => {
           const Icon = item.icon;
           return (
@@ -73,18 +73,18 @@ export function QuickAccessShortcuts({ onOpenCategory, onSearchKey }) {
               key={idx}
               type="button"
               onClick={() => onSearchKey(item.searchTerm)}
-              className="p-3 bg-navy-900 hover:bg-navy-850 border border-slate-800 hover:border-slate-700 rounded-xl text-left transition group cursor-pointer flex flex-col justify-between"
+              className="p-3 bg-white dark:bg-navy-900 hover:bg-slate-50 dark:hover:bg-navy-850 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 rounded-xl text-left transition group cursor-pointer flex flex-col justify-between shadow-sm"
             >
               <div
-                className={`w-8 h-8 rounded-lg bg-gradient-to-tr ${item.color} text-white flex items-center justify-center mb-2 shadow-sm`}
+                className={`w-8 h-8 rounded-lg bg-gradient-to-tr ${item.color} text-white flex items-center justify-center mb-2 shadow-sm shrink-0`}
               >
                 <Icon className="w-4 h-4" />
               </div>
-              <div>
-                <h5 className="text-xs font-semibold text-white group-hover:text-vault-accent transition truncate">
+              <div className="min-w-0">
+                <h5 className="text-xs font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-vault-accent transition truncate">
                   {item.title}
                 </h5>
-                <p className="text-[10px] text-slate-400 truncate mt-0.5">{item.subtitle}</p>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate mt-0.5">{item.subtitle}</p>
               </div>
             </button>
           );

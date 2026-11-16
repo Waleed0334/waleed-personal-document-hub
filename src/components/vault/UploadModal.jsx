@@ -98,32 +98,33 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
-      <div className="w-full max-w-xl bg-navy-900 border border-slate-800 rounded-2xl shadow-2xl p-6 relative my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 dark:bg-black/80 backdrop-blur-md overflow-y-auto">
+      <div className="w-full max-w-xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-4 sm:p-6 relative my-auto max-h-[92vh] overflow-y-auto transition-colors duration-200">
         <button
           type="button"
           onClick={onClose}
           disabled={uploading}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+          aria-label="Close upload modal"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="flex items-center gap-3 mb-5">
-          <div className="w-10 h-10 rounded-xl bg-blue-600/20 text-vault-accent flex items-center justify-center border border-blue-500/30">
+          <div className="w-10 h-10 rounded-xl bg-blue-600/10 dark:bg-blue-600/20 text-blue-600 dark:text-vault-accent flex items-center justify-center border border-blue-500/20 dark:border-blue-500/30 shrink-0">
             <UploadCloud className="w-5 h-5" />
           </div>
-          <div>
-            <h2 className="text-xl font-bold text-white">Upload Private Documents</h2>
-            <p className="text-xs text-slate-400">Encrypted in private storage vault with owner-only access</p>
+          <div className="min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white truncate">Upload Private Documents</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 truncate">Encrypted in private storage vault with owner-only access</p>
           </div>
         </div>
 
         {errors.length > 0 && (
-          <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs space-y-1">
+          <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 text-xs space-y-1">
             {errors.map((err, idx) => (
               <div key={idx} className="flex items-center gap-1.5">
-                <AlertCircle className="w-3.5 h-3.5 shrink-0 text-rose-400" />
+                <AlertCircle className="w-3.5 h-3.5 shrink-0 text-rose-500 dark:text-rose-400" />
                 <span>{err}</span>
               </div>
             ))}
@@ -131,8 +132,8 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
         )}
 
         {successCount > 0 && (
-          <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
             <span>Successfully stored {successCount} document(s) in vault!</span>
           </div>
         )}
@@ -147,10 +148,10 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
             onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
-            className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition ${
+            className={`border-2 border-dashed rounded-xl p-4 sm:p-6 text-center cursor-pointer transition ${
               isDragging
-                ? 'border-vault-accent bg-blue-600/10'
-                : 'border-slate-700 hover:border-slate-500 bg-navy-950/50'
+                ? 'border-blue-500 dark:border-vault-accent bg-blue-500/10'
+                : 'border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 bg-slate-50 dark:bg-navy-950/50'
             }`}
           >
             <input
@@ -160,29 +161,29 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
               className="hidden"
               onChange={(e) => handleFilesAdded(e.target.files)}
             />
-            <UploadCloud className="w-10 h-10 mx-auto text-vault-accent mb-2" />
-            <p className="text-sm font-medium text-slate-200">
-              Drop your files here, or <span className="text-vault-accent underline">browse</span>
+            <UploadCloud className="w-8 h-8 sm:w-10 sm:h-10 mx-auto text-blue-600 dark:text-vault-accent mb-2" />
+            <p className="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200">
+              Drop files here, or <span className="text-blue-600 dark:text-vault-accent underline font-semibold">browse</span>
             </p>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
               Supports PDF, PNG, JPG, JPEG, DOCX (Max 50 MB per file)
             </p>
           </div>
 
           {/* Selected Files List */}
           {selectedFiles.length > 0 && (
-            <div className="max-h-40 overflow-y-auto space-y-2 pr-1">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
+            <div className="max-h-36 overflow-y-auto space-y-2 pr-1">
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
                 Selected Files ({selectedFiles.length})
               </span>
               {selectedFiles.map((f, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-2.5 bg-navy-800 rounded-lg border border-slate-700/80 text-xs"
+                  className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-navy-800 rounded-lg border border-slate-200 dark:border-slate-700/80 text-xs"
                 >
                   <div className="flex items-center gap-2 truncate">
-                    <File className="w-4 h-4 text-vault-accent shrink-0" />
-                    <span className="text-slate-200 truncate font-medium">{f.name}</span>
+                    <File className="w-4 h-4 text-blue-600 dark:text-vault-accent shrink-0" />
+                    <span className="text-slate-800 dark:text-slate-200 truncate font-medium">{f.name}</span>
                     <span className="text-slate-500 shrink-0">
                       ({(f.size / (1024 * 1024)).toFixed(2)} MB)
                     </span>
@@ -193,7 +194,8 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
                       e.stopPropagation();
                       handleRemoveFile(idx);
                     }}
-                    className="text-slate-400 hover:text-rose-400 p-1"
+                    className="text-slate-400 hover:text-rose-500 p-1"
+                    aria-label="Remove file"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -205,8 +207,8 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
           {/* Category & Subcategory */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
-                <Folder className="w-3.5 h-3.5 text-vault-accent" /> Category
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-1.5">
+                <Folder className="w-3.5 h-3.5 text-blue-600 dark:text-vault-accent" /> Category
               </label>
               <select
                 value={selectedCategoryId}
@@ -214,10 +216,10 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
                   setSelectedCategoryId(e.target.value);
                   setSelectedSubcategory('');
                 }}
-                className="w-full px-3 py-2 bg-navy-800 border border-slate-700 rounded-lg text-white text-xs focus:ring-2 focus:ring-vault-accent focus:outline-none"
+                className="w-full px-3 py-2 bg-slate-50 dark:bg-navy-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-blue-500 dark:focus:ring-vault-accent focus:outline-none"
               >
                 {categories.map((c) => (
-                  <option key={c.id} value={c.id}>
+                  <option key={c.id} value={c.id} className="bg-white dark:bg-navy-900 text-slate-900 dark:text-white">
                     {c.name}
                   </option>
                 ))}
@@ -225,17 +227,17 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Subcategory (Document Slot)
               </label>
               <select
                 value={selectedSubcategory}
                 onChange={(e) => setSelectedSubcategory(e.target.value)}
-                className="w-full px-3 py-2 bg-navy-800 border border-slate-700 rounded-lg text-white text-xs focus:ring-2 focus:ring-vault-accent focus:outline-none"
+                className="w-full px-3 py-2 bg-slate-50 dark:bg-navy-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-blue-500 dark:focus:ring-vault-accent focus:outline-none"
               >
-                <option value="">-- General / No Subcategory --</option>
+                <option value="" className="bg-white dark:bg-navy-900 text-slate-900 dark:text-white">-- General / No Subcategory --</option>
                 {subcategories.map((sub, idx) => (
-                  <option key={idx} value={sub}>
+                  <option key={idx} value={sub} className="bg-white dark:bg-navy-900 text-slate-900 dark:text-white">
                     {sub}
                   </option>
                 ))}
@@ -245,20 +247,21 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
 
           {/* Tags */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
-              <Tag className="w-3.5 h-3.5 text-vault-accent" /> Custom Tags
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-1.5">
+              <Tag className="w-3.5 h-3.5 text-blue-600 dark:text-vault-accent" /> Custom Tags
             </label>
             <div className="flex flex-wrap gap-1.5 mb-2">
               {tags.map((t, idx) => (
                 <span
                   key={idx}
-                  className="px-2 py-0.5 rounded-md bg-blue-600/30 text-sky-200 border border-blue-500/40 text-xs flex items-center gap-1"
+                  className="px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-600/30 text-blue-700 dark:text-sky-200 border border-blue-200 dark:border-blue-500/40 text-xs flex items-center gap-1"
                 >
                   #{t}
                   <button
                     type="button"
                     onClick={() => handleRemoveTag(t)}
-                    className="hover:text-rose-300"
+                    className="hover:text-rose-500 dark:hover:text-rose-300"
+                    aria-label={`Remove tag ${t}`}
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -271,13 +274,13 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
               onChange={(e) => setCustomTagInput(e.target.value)}
               onKeyDown={handleAddTag}
               placeholder="Type tag (e.g. FAST, Spring2025, CNIC) and press Enter"
-              className="w-full px-3 py-2 bg-navy-800 border border-slate-700 rounded-lg text-white text-xs focus:ring-2 focus:ring-vault-accent focus:outline-none"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-navy-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-xs focus:ring-2 focus:ring-blue-500 dark:focus:ring-vault-accent focus:outline-none"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Description / Notes (Optional)
             </label>
             <textarea
@@ -285,14 +288,14 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Important notes, verification date, or issuance details..."
-              className="w-full px-3 py-2 bg-navy-800 border border-slate-700 rounded-lg text-white text-xs focus:ring-2 focus:ring-vault-accent focus:outline-none resize-none"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-navy-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-xs focus:ring-2 focus:ring-blue-500 dark:focus:ring-vault-accent focus:outline-none resize-none"
             />
           </div>
 
           {uploading && (
-            <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
               <div
-                className="bg-vault-accent h-full transition-all duration-300"
+                className="bg-blue-600 dark:bg-vault-accent h-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -303,7 +306,7 @@ export function UploadModal({ isOpen, onClose, defaultCategoryId = null }) {
               type="button"
               onClick={onClose}
               disabled={uploading}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition"
+              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition"
             >
               Cancel
             </button>

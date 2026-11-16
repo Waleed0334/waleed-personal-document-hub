@@ -3,8 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-[#070b14] text-slate-100 font-sans;
+    @apply bg-slate-50 text-slate-900 dark:bg-[#070b14] dark:text-slate-100 font-sans antialiased;
+    overflow-x: hidden;
   }
 
   /* Custom scrollbar */
@@ -12,14 +17,38 @@
     width: 6px;
     height: 6px;
   }
+  
   ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  .dark ::-webkit-scrollbar-track {
     background: #0a0f1d;
   }
+
   ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
     background: #1e293b;
     border-radius: 9999px;
   }
+
   ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
     background: #334155;
+  }
+}
+
+/* Custom helper to hide scrollbars while allowing touch scrolling */
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

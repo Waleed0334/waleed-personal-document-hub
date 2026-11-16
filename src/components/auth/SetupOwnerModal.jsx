@@ -41,33 +41,34 @@ export function SetupOwnerModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
-      <div className="w-full max-w-md bg-navy-900 border border-slate-800 rounded-2xl shadow-2xl p-6 relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 dark:bg-black/80 backdrop-blur-sm overflow-y-auto">
+      <div className="w-full max-w-md bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-5 sm:p-6 relative my-auto max-h-[92vh] overflow-y-auto transition-colors duration-200">
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+          aria-label="Close setup owner modal"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-blue-600/20 text-vault-accent flex items-center justify-center border border-blue-500/30">
+          <div className="w-10 h-10 rounded-xl bg-blue-600/10 dark:bg-blue-600/20 text-blue-600 dark:text-vault-accent flex items-center justify-center border border-blue-500/20 dark:border-blue-500/30 shrink-0">
             <ShieldCheck className="w-5 h-5" />
           </div>
-          <div>
-            <h2 className="text-lg font-bold text-white">Create Owner Account</h2>
-            <p className="text-xs text-slate-400">Establish the primary vault administrator</p>
+          <div className="min-w-0">
+            <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white truncate">Create Owner Account</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 truncate">Establish the primary vault administrator</p>
           </div>
         </div>
 
         {success ? (
-          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm space-y-3">
+          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-sm space-y-3">
             <div className="flex items-center gap-2 font-semibold">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+              <CheckCircle2 className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
               <span>Owner Account Created!</span>
             </div>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Your account has been registered with primary owner privileges. Check your email inbox to confirm if Supabase email confirmation is enabled, then log in.
             </p>
             <button
@@ -81,45 +82,45 @@ export function SetupOwnerModal({ isOpen, onClose }) {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0" />
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-rose-500 dark:text-rose-400" />
                 <span>{error}</span>
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Full Name</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Full Name</label>
               <div className="relative">
-                <User className="absolute left-3 top-2.5 w-4 h-4 text-slate-500" />
+                <User className="absolute left-3 top-2.5 w-4 h-4 text-slate-400 dark:text-slate-500" />
                 <input
                   type="text"
                   required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-navy-800 border border-slate-700 rounded-lg text-white text-sm focus:ring-2 focus:ring-vault-accent focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-navy-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 dark:focus:ring-vault-accent focus:outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Owner Email</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Owner Email</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-2.5 w-4 h-4 text-slate-500" />
+                <Mail className="absolute left-3 top-2.5 w-4 h-4 text-slate-400 dark:text-slate-500" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="yourname@domain.com"
-                  className="w-full pl-9 pr-3 py-2 bg-navy-800 border border-slate-700 rounded-lg text-white text-sm focus:ring-2 focus:ring-vault-accent focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-navy-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 dark:focus:ring-vault-accent focus:outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Master Password</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Master Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-2.5 w-4 h-4 text-slate-500" />
+                <Lock className="absolute left-3 top-2.5 w-4 h-4 text-slate-400 dark:text-slate-500" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
@@ -127,12 +128,13 @@ export function SetupOwnerModal({ isOpen, onClose }) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Minimum 8 characters"
-                  className="w-full pl-9 pr-9 py-2 bg-navy-800 border border-slate-700 rounded-lg text-white text-sm focus:ring-2 focus:ring-vault-accent focus:outline-none"
+                  className="w-full pl-9 pr-9 py-2 bg-slate-50 dark:bg-navy-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 dark:focus:ring-vault-accent focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-2.5 text-slate-400 hover:text-white"
+                  className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-white"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -140,16 +142,16 @@ export function SetupOwnerModal({ isOpen, onClose }) {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Confirm Password</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Confirm Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-2.5 w-4 h-4 text-slate-500" />
+                <Lock className="absolute left-3 top-2.5 w-4 h-4 text-slate-400 dark:text-slate-500" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-type password"
-                  className="w-full pl-9 pr-3 py-2 bg-navy-800 border border-slate-700 rounded-lg text-white text-sm focus:ring-2 focus:ring-vault-accent focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-navy-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 dark:focus:ring-vault-accent focus:outline-none"
                 />
               </div>
             </div>

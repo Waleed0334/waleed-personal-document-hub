@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { DocumentProvider, useDocuments } from './context/DocumentContext';
 import { Sidebar } from './components/layout/Sidebar';
@@ -65,12 +66,12 @@ function VaultApp() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-navy-950 flex flex-col items-center justify-center p-4">
-        <div className="w-14 h-14 rounded-2xl bg-blue-600/20 text-vault-accent flex items-center justify-center border border-blue-500/30 mb-4 animate-pulse">
+      <div className="min-h-screen bg-slate-50 dark:bg-navy-950 flex flex-col items-center justify-center p-4">
+        <div className="w-14 h-14 rounded-2xl bg-blue-600/10 dark:bg-blue-600/20 text-blue-600 dark:text-vault-accent flex items-center justify-center border border-blue-500/20 dark:border-blue-500/30 mb-4 animate-pulse">
           <Shield className="w-8 h-8" />
         </div>
-        <h2 className="text-lg font-bold text-white tracking-tight">Waleed's Document Vault</h2>
-        <p className="text-xs text-slate-400 mt-1">Initializing secure encrypted environment...</p>
+        <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Waleed's Document Vault</h2>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Initializing secure encrypted environment...</p>
       </div>
     );
   }
@@ -117,7 +118,7 @@ function VaultApp() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 flex overflow-x-hidden">
       {/* Sidebar Navigation */}
       <Sidebar
         currentView={currentView}
@@ -131,7 +132,7 @@ function VaultApp() {
 
       {/* Main Content Area */}
       <div
-        className={`flex-1 flex flex-col min-h-screen transition-all duration-300 ${
+        className={`flex-1 flex flex-col min-h-screen min-w-0 transition-all duration-300 ${
           isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'
         }`}
       >
@@ -144,7 +145,7 @@ function VaultApp() {
         />
 
         {/* Dynamic Page Views */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+        <main className="flex-1 p-3.5 sm:p-6 lg:p-8 overflow-y-auto min-w-0">
           {currentView.view === 'dashboard' && (
             <DashboardView
               onOpenUpload={handleOpenUpload}
@@ -211,10 +212,12 @@ function VaultApp() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <DocumentProvider>
-        <VaultApp />
-      </DocumentProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <DocumentProvider>
+          <VaultApp />
+        </DocumentProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
